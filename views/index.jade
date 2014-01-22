@@ -1,0 +1,7 @@
+extends layout
+append scripts
+	script(src='/javascripts/index.js')
+block content
+	h1= title
+	p Welcome to #{title}
+	p(ng-repeat='link in links',ng-class='message.me', class='') {{link.img}}
