@@ -11,12 +11,12 @@ client = redis.createClient();
 module.exports = function(io) {
 		var routes = {};
 		const publish = redis.createClient()
-		routes.index = function (req, res) {
+	routes.index = function (req, res) {
 		res.render('index', { title: 'Express' });
 		var domain = 'http://www.chotot.vn/tp_hồ_chí_minh';
 		var string = "";
 		if (req.url == '/')
-			request(domain, gotHTML);
+			setInterval(function(){request(domain, gotHTML)},20000);
 
 
 		io.sockets.on('connection', function(socket) {
@@ -61,7 +61,8 @@ module.exports = function(io) {
 				for(var t in rimgs){
 					console.log(rimgs[t]);
 				}
-				publish.publish('realtime', JSON.stringify(nimgs));
+				if (nimgs.length > 0)
+					publish.publish('realtime', JSON.stringify(nimgs));
 			});
 	}
 	return routes;
