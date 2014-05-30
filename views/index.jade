@@ -2,5 +2,6 @@ extends layout
 append scripts
 	script(src='/javascripts/index.js')
 block content
-	div(ng-repeat="link in links", ng-animate="'animate'", class="ctimg")
-		img(ng-src="{{link}}")
+	div(ng-List="links",class="ui-sortable")
+		div(ng-repeat="link in links | orderBy:'order':true",class="ctimg")
+			img(ng-src="{{link.url}}")
